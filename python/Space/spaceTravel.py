@@ -7,86 +7,87 @@ destination = target[1]
 
 
 class node:
-    padre = None
+    father = None
 
-    def __init__(self, padre=None, nombre=0):
-        self.padre = padre
-        self.nombre = nombre
+    def __init__(self, father=None, name=0):
+        self.father = father
+        self.name = name
 
     def __eq__(self, otro):
-        return self.nombre == otro.nombre
+        return self.name == otro.name
 
     def __str__(self):
-        return self.nombre
+        return self.name
 
     def __repr__(self):
         return self.__str__()
 
 
-# Creacion de nodes y Conexiones con su padre
 nodes = []
 for i in range(len(routs)):
-  ruta = routs[i].split(" ")
-  node1 = node(nombre=ruta[0])
-  node2 = node(node1.nombre, ruta[1])
-  if node1 not in nodes:
-    nodes.append(node1)
-  if node2 not in nodes:
-    nodes.append(node2)
-
-  for j in range(len(nodes)):
-    if node1 == nodes[j]:
-      if nodes[j].padre == None:
-        nodes[j] = node1
-      elif (nodes[j].padre != node1.padre) and (node1.padre!=None):
+    rout = routs[i].split(" ")
+    node1 = node(name=rout[0])
+    node2 = node(node1.name, rout[1])
+    if node1 not in nodes:
         nodes.append(node1)
-    
-    if node2 == nodes[j]:
-      if nodes[j].padre == None:
-        nodes[j] = node2
-      elif nodes[j].padre != node2.padre and (node2.padre!=None):
+    if node2 not in nodes:
         nodes.append(node2)
+
+    for j in range(len(nodes)):
+        if node1 == nodes[j]:
+            if nodes[j].father == None:
+                nodes[j] = node1
+            elif (nodes[j].father != node1.father) and (node1.father != None):
+                nodes.append(node1)
+
+        if node2 == nodes[j]:
+            if nodes[j].father == None:
+                nodes[j] = node2
+            elif nodes[j].father != node2.father and (node2.father != None):
+                nodes.append(node2)
 
 print(nodes)
 
-# Verificacion de las rutas incorrectas
-posibles_rutas = []
+
+possible_routs = []
 
 for i in range(len(nodes)):
-  ruta = []
-  if nodes[i].padre == None:
-    ruta.append(nodes[i])
-    array = []
-    for j in range(len(nodes)):
-      if nodes[j].padre == ruta[-1].nombre:
-        ruta.append(nodes[j])
-      elif nodes[j].padre != None:
-        if node(nombre=nodes[j].padre) in ruta:
-          copia_ruta = ruta.copy()
-          while copia_ruta[-1] != node(nombre=nodes[j].padre):
-            copia_ruta.pop()
-          copia_ruta.append(nodes[j])
-          print(copia_ruta)
-          posibles_rutas.append(copia_ruta.copy())
-  
-  if len(ruta)!=0:
-    print(ruta)
-    posibles_rutas.append(ruta)
+    rout = []
+    if nodes[i].father == None:
+        rout.append(nodes[i])
+        array = []
+        for j in range(len(nodes)):
+            if nodes[j].father == rout[-1].name:
+                rout.append(nodes[j])
+            elif nodes[j].father != None:
+                if node(name=nodes[j].father) in rout:
+                    routCopy = rout.copy()
+                    while routCopy[-1] != node(name=nodes[j].father):
+                        routCopy.pop()
+                    routCopy.append(nodes[j])
+                    print(routCopy)
+                    possible_routs.append(routCopy.copy())
 
-# identificacion del objetivo
-pos = 0
+    if len(rout) != 0:
+        print(rout)
+        possible_routs.append(rout)
 
 os.system("clear")
 
 print("The wrong routs are:")
 
-for ruta in posibles_rutas:
-  decision = False
-  for j in range(len(ruta)):
-    if node(nombre=target[0]) == ruta[j]:
-      for k in range(j,len(ruta)):
-        if node(nombre=target[1]) == ruta[k]:
-          decision=True
+for rout in possible_routs:
+    decision = False
+    for j in range(len(rout)):
+        if node(name=target[0]) == rout[j]:
+            for k in range(j, len(rout)):
+                if node(name=target[1]) == rout[k]:
+                    decision = True
 
-  if decision == False:
-    print(ruta)
+    if decision == False:
+        for i in range(len(rout)):
+            if i != len(rout)-1:
+                print(rout[i], end=" -> ")
+            else:
+                print(rout[i])
+
