@@ -5,13 +5,14 @@ os.system("clear")
 
 billDictionary = {}
 
-option = str(input("Digite una option:\n1. Añadir una factura\n2. Pagar una factura\n3. Salir\n\n\n"))
+option = str(input(
+    "Digite una option:\n1. Añadir una factura\n2. Pagar una factura\n3. Enter para Salir\n\n\n"))
 
 billNumber = 0
 billCost = 0
 
 while option != "":
-    
+
     os.system("clear")
 
     if option == "1":
@@ -25,9 +26,9 @@ while option != "":
 
         billDictionary[billNumber] = billCost
         print("Añadiendo...")
-        time.sleep(1)      
+        time.sleep(1)
 
-    elif option == "2" and len(billDictionary) != 0 :
+    elif option == "2" and len(billDictionary) != 0:
         os.system("clear")
         print("Pagar factura\n\n")
         print("Digite el numero de de factura a pagar:")
@@ -39,7 +40,7 @@ while option != "":
             print("El nuemro de factura ingresado no corresponde, intene nuevemente")
             break
 
-        print("La factura tiene un saldo de:", billDictionary[billNumber])       
+        print("La factura tiene un saldo de:", billDictionary[billNumber])
         print("Digite el valor a cancelar")
         billCost = float(input())
         if billCost <= billDictionary[billNumber]:
@@ -52,7 +53,7 @@ while option != "":
                 billDictionary[billNumber] = newbillcost
                 print("El nuevo saldo es de:\n", billDictionary[billNumber])
                 print("pagando...")
-                time.sleep(1)            
+                time.sleep(1)
         else:
             print("El valor a cancelar es mayor al saldo")
             time.sleep(1)
@@ -64,9 +65,10 @@ while option != "":
     else:
         os.system("clear")
         print("Opción inválida\n\n")
-    
+
     option = ""
     os.system("clear")
-    option = str(input("Digite una option:\n1. Añadir una factura\n2. Para pagar una factura\n3. Salir\n"))
+    option = str(input(
+        "Digite una option:\n1. Añadir una factura\n2. Para pagar una factura\n3. Salir\n"))
 
 print(billDictionary)
