@@ -1,7 +1,11 @@
+import os
+
+os.system("clear")
+
 inputCodigo = ["| ||| |", "||  |||", "   |||||| ", "|| |||"]
 # inputCodigo = ["| ||| |"]
 
-stock = {'41': ['Manzana', 800], '302': ['Tamarino', 600], '6000': ['Papel h', 1500],
+stock = {'41': ['Manzana', 800], '302': ['Tamarindo', 600], '6000': ['Papel higienico', 1500],
          '32': ['Café', 7500],  '5500': ['Tomate chonto', 3500]}
 
 selected = []
